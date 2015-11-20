@@ -27,6 +27,7 @@ import ar.com.example.dao.ExampleDAO;
 import ar.com.example.dao.ExampleDAOImpl;
 
 import com.ibm.json.java.JSONObject;
+import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import com.worklight.adapters.rest.api.WLServerAPI;
 import com.worklight.adapters.rest.api.WLServerAPIProvider;
 
@@ -66,4 +67,28 @@ public class ExampleAdapterResource {
       return getResponse(new JSONObject(), Status.INTERNAL_SERVER_ERROR);
     }
   }
+  
+  public static DataSource getMySQLDataSource(){
+    MysqlDataSource ds = new MysqlDataSource();
+    ds.setUser("root");
+    ds.setPassword("root");
+    ds.setUrl("jdbc:mysql://localhost:3306/tab");
+    return ds;
+  }
+  
+  @GET
+  @Produces(MediaType.APPLICATION_JSON)
+  @Path("/getAllByMySQL")
+  public Response getUserByDAOWithMySQL(@QueryParam(value = "language") String language) {
+    try {
+      ds = getMySQLDataSource();
+      dao = new ExampleDAOImpl(ds);
+      language = StringUtils.isEmpty(language) ? DEFAULT_LANGUAGE : language;
+      Response res = getResponse(dao.getAllUser(language), Status.OK);
+      return res;
+    } catch (Exception exception) {
+      System.out.println(exception.getMessage());
+      return getResponse(new JSONObject(), Status.INTERNAL_SERVER_ERROR);
+    }
+  }  
 }
