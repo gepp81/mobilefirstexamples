@@ -1,8 +1,8 @@
-package ar.com.example.dao;
+package ar.com.example.adapters.simple.dao;
 
 import java.util.List;
 
-import ar.com.example.dto.UserDTO;
+import ar.com.example.adapters.simple.dto.UserDTO;
 
 public interface ExampleDAO {
 

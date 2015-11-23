@@ -1,4 +1,4 @@
-package ar.com.example.dao;
+package ar.com.example.adapters.simple.dao;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import ar.com.example.dto.UserDTO;
+import ar.com.example.adapters.simple.dto.UserDTO;
 
 public class ExampleDAOImpl implements ExampleDAO {
 

@@ -5,7 +5,7 @@
  *    disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
  */
 
-package ar.com.example;
+package ar.com.example.adapters.simple;
 
 import java.util.logging.Logger;
 
@@ -23,8 +23,8 @@ import javax.ws.rs.core.Response.Status;
 
 import org.apache.commons.lang3.StringUtils;
 
-import ar.com.example.dao.ExampleDAO;
-import ar.com.example.dao.ExampleDAOImpl;
+import ar.com.example.adapters.simple.dao.ExampleDAO;
+import ar.com.example.adapters.simple.dao.ExampleDAOImpl;
 
 import com.ibm.json.java.JSONObject;
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;

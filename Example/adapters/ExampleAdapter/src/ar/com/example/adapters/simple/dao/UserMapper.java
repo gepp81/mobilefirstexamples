@@ -1,11 +1,11 @@
-package ar.com.example.dao;
+package ar.com.example.adapters.simple.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import ar.com.example.dto.UserDTO;
+import ar.com.example.adapters.simple.dto.UserDTO;
 
 public class UserMapper implements RowMapper<UserDTO> {
 

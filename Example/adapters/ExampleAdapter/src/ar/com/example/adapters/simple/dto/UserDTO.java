@@ -1,4 +1,4 @@
-package ar.com.example.dto;
+package ar.com.example.adapters.simple.dto;
 
 public class UserDTO {
 
