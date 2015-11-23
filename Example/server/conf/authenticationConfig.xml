@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:loginConfiguration xmlns:tns="http://www.worklight.com/auth/config"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<staticResources>
+		<resource id="subscribeServlet" securityTest="SubscribeServlet">
+			<urlPatterns>/subscribeSMS*;/receiveSMS*;/ussd*</urlPatterns>
+		</resource>
+	</staticResources>
+
+	<securityTests>
+		<customSecurityTest name="SubscribeServlet">
+			<test realm="SubscribeServlet" isInternalUserID="true" />
+		</customSecurityTest>
+
+		<customSecurityTest name="ExampleSecurityTest">
+			<test realm="wl_directUpdateRealm" step="1" />
+			<test isInternalUserID="true" realm="ExampleRealm" />
+		</customSecurityTest>
+	</securityTests>
+
+	<realms>
+		<realm name="SubscribeServlet" loginModule="rejectAll">
+			<className>com.worklight.core.auth.ext.HeaderAuthenticator</className>
+		</realm>
+		<realm loginModule="ExampleLoginModule" name="ExampleRealm">
+			<className>com.worklight.core.auth.ext.FormBasedAuthenticator</className>
+		</realm>
+	</realms>
+
+	<loginModules>
+		<loginModule name="ExampleLoginModule">
+			<className>com.worklight.core.auth.ext.LdapLoginModule</className>
+			<parameter name="ldapProviderUrl" value="${example.ldap.url}" />
+			<parameter name="ldapTimeoutMs" value="${example.ldap.timeout.request}" />
+			<parameter name="ldapSecurityAuthentication" value="${example.ldap.type.auth}" />
+			<parameter name="validationType" value="${example.ldap.type.validation}" />
+			<parameter name="ldapSecurityPrincipalPattern" value="${example.ldap.pattern}" />
+			<parameter name="ldapSearchFilterPattern" value="${example.ldap.filter}" />
+			<parameter name="ldapSearchBase" value="${example.ldap.base}" />
+		</loginModule>
+		<loginModule name="StrongDummy" expirationInSeconds="3600">
+			<className>com.worklight.core.auth.ext.NonValidatingLoginModule</className>
+		</loginModule>
+
+		<loginModule name="requireLogin" expirationInSeconds="3600">
+			<className>com.worklight.core.auth.ext.SingleIdentityLoginModule</className>
+		</loginModule>
+
+		<loginModule name="rejectAll" expirationInSeconds="3600">
+			<className>com.worklight.core.auth.ext.RejectingLoginModule</className>
+		</loginModule>
+	</loginModules>
+
+</tns:loginConfiguration>
